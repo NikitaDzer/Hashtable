@@ -2,13 +2,14 @@
 // Created by User on 09.04.2022.
 //
 
+/*
 #include "../include/dump.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-typedef list_item_t  item_t;
+typedef list_item_t  Pair;
 typedef list_index_t index_t;
 
 static FILE    *stream  = NULL;
@@ -29,7 +30,7 @@ static void dump_open()
               "\t<head lang='en'>                                                          \n"
               "\t\t<meta charset='utf-8'>                                                  \n"
               "\t\t<meta name='viewport' content='width=device-width'>                     \n"
-              "\t\t<title>List dump</title>                                                \n"
+              "\t\t<title>_HtList dump</title>                                                \n"
               "\t\t<style>                                                                 \n"
               "\t\tbody {                                                                  \n"
               "\t\t\tbackground: #222222;                                                  \n"
@@ -127,7 +128,7 @@ void list_dump(const List *const p_list)
    fprintf(stream,
            "\t\t<hr width = '100%' >                                     \n"
            "\t\t<div class = 'list'>                                     \n"
-           "\t\t\t<pre>List address: %p</pre>                            \n"
+           "\t\t\t<pre>_HtList address: %p</pre>                            \n"
            "\t\t\t<pre>Size:         %lld</pre>                          \n"
            "\t\t\t<pre>Free:         %lld</pre>                          \n"
            "\t\t\t<pre>NODS:         %p</pre>                            \n"
@@ -144,3 +145,4 @@ void list_dump(const List *const p_list)
    
    n_dumps += 1;
 }
+ */

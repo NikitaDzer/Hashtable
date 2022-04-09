@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/hashTable.h"
+#include "include/hashtable.h"
 #include "include/dump.h"
 
 /* X86_64
@@ -8,7 +8,24 @@
  * Memory damage
  * 32-byte strings only
  */
+ 
+/*
+ *
+ * HtInstance
+ * HtList
+ * HtListItem
+ *
+ * construct_hashtable()
+ * destruct_hashtable()
+ * hashtable_insert()
+ * hashtable_search()
+ * hashtable_remove()
+ * hashtable_clear()
+ * hashtable_has()
+ *
+ */
 
+/*
 static const char* get_text(const char* const file_path, long *const p_text_size)
 {
 	FILE* const file = fopen(file_path, "r");
@@ -55,66 +72,13 @@ static long put_word(char buffer[N_KEY_CHARS], const char* const start)
 
 	return i;
 }
+*/
+
 
 int main(void)
-{   
-	HashTable *const p_hashTable = construct_hashTable();
-   
-   
-	long text_size = 0;
-	const char* const text = get_text("../HarryPotter.txt", &text_size);
-	
-	char temp_buffer[N_KEY_CHARS] = "";
-
-	for (long k = 0; k < 1; k++)
-		for (long i = 0; i < text_size; i++)
-		{
-			if (text[i] == ' ' || text[i] == '\n')
-				continue;
-
-			i += put_word(temp_buffer, text + i);
-
-			hashTable_insert(p_hashTable, temp_buffer, (ht_value_t) { .position = i });
-
-			for (long j = i; j < text_size; j++)
-				if (text[j] == ' ' || text[j] == '\n')
-					break;
-
-		}
-  
-	for (long k = 0; k < 1; k++)
-		for (long i = 0; i < text_size; i++)
-		{
-			if (text[i] == ' ' || text[i] == '\n')
-				continue;
-
-			i += put_word(temp_buffer, text + i);
-
-			hashTable_search(p_hashTable, temp_buffer);
-
-			for (long j = i; j < text_size; j++)
-				if (text[j] == ' ' || text[j] == '\n')
-					break;
-
-		}
-  
-	for (long k = 0; k < 1; k++)
-		for (long i = 0; i < text_size; i++)
-		{
-			if (text[i] == ' ' || text[i] == '\n')
-				continue;
-
-			i += put_word(temp_buffer, text + i);
-
-			hashTable_delete(p_hashTable, temp_buffer);
-
-			for (long j = i; j < text_size; j++)
-				if (text[j] == ' ' || text[j] == '\n')
-					break;
-
-		}
-
-	destruct_hashTable(p_hashTable);
-   
-   return 0;
+{
+    HtHashtable *restrict ht_hashtable = construct_hashtable();
+    destruct_hashtable(ht_hashtable);
+    
+    return 0;
 }

@@ -1,0 +1,9 @@
+// Created by Nikita Dzer on 09.04.2022.
+
+#ifndef HASHTABLE_SETTINGS_H
+#define HASHTABLE_SETTINGS_H
+
+#define HT_KEY_ALIGNMENT   32
+#define HT_MAX_N_KEY_CHARS 32
+
+#endif // HASHTABLE_SETTINGS_H

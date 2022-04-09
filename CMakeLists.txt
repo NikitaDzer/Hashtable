@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 project(Hashtable C)
 
-SET(MYCOMPILE_FLAGS "-g -O1")
+SET(MYCOMPILE_FLAGS "/DEBUG /Od")
 SET(CMAKE_C_FLAGS "${MYCOMPILE_FLAGS}")
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Hashtable main.c list/src/list.c list/include/list.h src/hashTable.c src/hash.c include/hashTable.h include/hash.h include/ht_value.h src/dump.c include/dump.h)
+add_executable(Hashtable main.c src/list.c include/list.h src/hashtable.c src/hash.c include/hashtable.h include/hash.h src/dump.c include/dump.h include/htdef.h include/settings.h)
