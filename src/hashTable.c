@@ -68,9 +68,14 @@ ht_value_t* hashTable_search(const HashTable *const p_hastTable, const char *con
 void hashTable_insert(HashTable *const p_hashTable, const char *const key, const ht_value_t value)
 {
    List *const p_list = p_hashTable->lists + hash(key);
-   
+
    if (list_find_item_address(p_list, key) == NULL)
-      list_pushFront(p_list, (list_item_t){ .key = key, .value = value });
+   {
+       const list_item_t item = { 0 };
+
+       strncpy(item.key, key, N_KEY_CHARS);
+       list_pushFront(p_list, item);
+   }
 }
 
 void hashTable_delete(HashTable *const p_hashTable, const char *const key)

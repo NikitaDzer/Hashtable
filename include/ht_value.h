@@ -5,7 +5,7 @@
 
 typedef struct ht_value_t
 {
-   int age;
+   long position;
 } ht_value_t;
 
 #endif // HASHTABLE_HT_VALUE_H

@@ -5,11 +5,13 @@
 
 #include "../../include/ht_value.h"
 
+#define N_KEY_CHARS 32
+
 typedef signed long long int list_index_t;
 
 typedef struct list_item_t
 {
-   const char *key;
+   char key[N_KEY_CHARS];
    ht_value_t  value;
 } list_item_t;
 

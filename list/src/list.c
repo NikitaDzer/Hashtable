@@ -133,9 +133,12 @@ ht_value_t *list_extract(List *const p_list, const char *const key)
    index_t         prev  = LIST_NO_PREV;
    index_t         i     = p_list->head;
    
+   if (i == LIST_NO_ITEMS)
+       return NULL;
+
    while (true)
    {
-      if (strcmp(nodes[i].item.key, key) == 0)
+      if (strncmp(nodes[i].item.key, key, N_KEY_CHARS) == 0)
       {
          index = i;
          break;
@@ -177,11 +180,11 @@ item_t *list_find_item_address(const List *const p_list, const char *const key)
    {
       for (index_t i = p_list->head; i != p_list->tail; i = nodes[i].next)
       {
-         if (strcmp(nodes[i].item.key, key) == 0)
+         if (strncmp(nodes[i].item.key, key, N_KEY_CHARS) == 0)
             return &nodes[i].item;
       }
    
-      if (strcmp(nodes[p_list->tail].item.key, key) == 0)
+      if (strncmp(nodes[p_list->tail].item.key, key, N_KEY_CHARS) == 0)
          return &nodes[p_list->tail].item;
    }
    
