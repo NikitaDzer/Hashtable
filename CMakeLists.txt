@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(Hashtable C)
 
-SET(MYCOMPILE_FLAGS "/DEBUG /Od")
+SET(MYCOMPILE_FLAGS "-g3 -O0")
 SET(CMAKE_C_FLAGS "${MYCOMPILE_FLAGS}")
 
 set(CMAKE_C_STANDARD 11)

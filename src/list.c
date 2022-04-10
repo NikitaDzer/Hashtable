@@ -4,22 +4,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 typedef _ht_list_index_t index_t;
-typedef _HtListPair Pair;
 
+const index_t _HT_LIST_SUCCESS =  0;
+const index_t _HT_LIST_FAULT   = -1;
 
-static const index_t LIST_NO_FREE       = -1;
-static const index_t LIST_NO_PREV       = -1;
-static const index_t LIST_NO_INDEX      = -1;
-static const index_t LIST_NO_ITEMS      = -1;
+static const index_t LIST_NO_FREE   = -1;
+
+static const index_t LIST_OK_CYCLE  =  0;
+static const index_t LIST_BAD_CYCLE = -1;
+
 static const index_t N_INITIAL_LIST_NODES = 16;
 static const index_t LIST_NODES_MULTIPLIER = 2;
-
-
-const _ht_list_index_t LIST_FAULT   = -1;
-const _ht_list_index_t LIST_SUCCESS =  0;
 
 
 inline static void fill_free(_HtListNode *restrict nodes, const index_t list_size)
@@ -34,16 +31,16 @@ inline static void fill_free(_HtListNode *restrict nodes, const index_t list_siz
 
 static index_t get_free(_HtList *restrict ht_list)
 {
-   if (ht_list->free != LIST_NO_FREE)
-      return ht_list->free;
+    if (ht_list->free != LIST_NO_FREE)
+        return ht_list->free;
    
-   const index_t size     = ht_list->size;
-   const index_t capacity = size * LIST_NODES_MULTIPLIER;
+    const index_t size     = ht_list->size;
+    const index_t capacity = size * LIST_NODES_MULTIPLIER;
    
-   ht_list->nodes = (_HtListNode *)realloc(ht_list->nodes, capacity * sizeof(_HtListNode));
+    ht_list->nodes = (_HtListNode *)realloc(ht_list->nodes, capacity * sizeof(_HtListNode));
    
-   if (ht_list->nodes == NULL)
-      return LIST_FAULT;
+    if (ht_list->nodes == NULL)
+        return _HT_LIST_FAULT;
    
     fill_free(ht_list->nodes, capacity);
     
@@ -53,15 +50,52 @@ static index_t get_free(_HtList *restrict ht_list)
 }
 
 
-_HtList* list_construct(_HtList *restrict ht_list)
+static inline bool is_in_range(const index_t index)
+{
+    return 0 <= index;
+}
+
+static inline index_t tortoise_move(const _HtListNode *restrict nodes, const index_t start)
+{
+    return nodes[start].next;
+}
+
+static inline index_t hare_move(const _HtListNode *restrict nodes, const index_t start)
+{
+    return   is_in_range(nodes[start].next)
+           ? nodes[ nodes[start].next ].next
+           : LIST_BAD_CYCLE;
+}
+
+static index_t check_list_cycle(const _HtList *restrict ht_list)
+{
+   const _HtListNode *restrict nodes = ht_list->nodes;
+   
+   register index_t tortoise = 0;
+   register index_t hare     = 0;
+   
+   for (register index_t counter = 0; counter < ht_list->size; counter++)
+   {
+      tortoise = tortoise_move(nodes, tortoise);
+      hare     = hare_move    (nodes, hare);
+
+      if ( !(is_in_range(tortoise) && is_in_range(hare)) || tortoise == hare)
+         return LIST_BAD_CYCLE;
+   }
+   
+   return LIST_OK_CYCLE;
+}
+
+
+_HtList*           list_construct(_HtList *restrict ht_list)
 {
     ht_list->nodes = (_HtListNode *)malloc(N_INITIAL_LIST_NODES * sizeof(_HtListNode));
    
    if (ht_list->nodes == NULL)
-      return NULL;
+       return NULL;
     
     ht_list->free = 0;
-    ht_list->head = LIST_NO_ITEMS;
+    ht_list->head = LIST_NO_FREE;
     ht_list->size = 0;
     
     for (register index_t i = 0; i < N_INITIAL_LIST_NODES - 1; i++)
@@ -72,17 +106,18 @@ _HtList* list_construct(_HtList *restrict ht_list)
     return ht_list;
 }
 
-inline void list_destruct(_HtList *restrict ht_list)
+extern inline void list_destruct(_HtList *restrict ht_list)
 {
    if (ht_list->nodes != NULL)
       free(ht_list->nodes);
 }
 
+
 HtValue* list_insert(_HtList *restrict ht_list, const char *restrict key, const HtValue *restrict ht_value)
 {
    const index_t free = get_free(ht_list);
    
-   if (free == LIST_FAULT)
+   if (free == _HT_LIST_FAULT)
       return NULL;
    
    _HtListNode *restrict nodes = ht_list->nodes;
@@ -139,4 +174,24 @@ HtValue* list_find_value(const _HtList *restrict ht_list, const char *restrict k
         return &nodes[i].pair.value;
    
    return NULL;
+}
+
+index_t   verify_list(const _HtList *restrict ht_list)
+{
+    if (ht_list->nodes == NULL)
+        return _HT_LIST_FAULT;
+    
+    if ( !(is_in_range(ht_list->free) || ht_list->free == LIST_NO_FREE) )
+        return _HT_LIST_FAULT;
+    
+    if ( !(is_in_range(ht_list->head) || ht_list->head == LIST_NO_FREE) )
+        return _HT_LIST_FAULT;
+    
+    if (!is_in_range(ht_list->size))
+        return _HT_LIST_FAULT;
+    
+    if (check_list_cycle(ht_list) == LIST_BAD_CYCLE)
+        return _HT_LIST_FAULT;
+    
+    return _HT_LIST_SUCCESS;
 }

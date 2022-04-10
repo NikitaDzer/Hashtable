@@ -8,6 +8,7 @@
 #include <stddef.h>
 
 #define HT_N_HASHTABLE_LISTS USHRT_MAX + 1
+#define HT_DUMP
 
 typedef struct HtValue
 {
