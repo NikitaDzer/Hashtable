@@ -38,11 +38,10 @@ static index_t get_free(_HtList *restrict ht_list)
     const index_t capacity = size * LIST_NODES_MULTIPLIER;
    
     ht_list->nodes = (_HtListNode *)realloc(ht_list->nodes, capacity * sizeof(_HtListNode));
-   
     if (ht_list->nodes == NULL)
         return _HT_LIST_FAULT;
    
-    fill_free(ht_list->nodes, capacity);
+    fill_free(ht_list->nodes, size);
     
     ht_list->free = size;
    
@@ -52,7 +51,7 @@ static index_t get_free(_HtList *restrict ht_list)
 
 static inline bool is_in_range(const index_t index)
 {
-    return 0 <= index;
+    return 0 <= index || index == LIST_NO_FREE;
 }
 
 static inline index_t tortoise_move(const _HtListNode *restrict nodes, const index_t start)
@@ -67,12 +66,13 @@ static inline index_t hare_move(const _HtListNode *restrict nodes, const index_t
            : LIST_BAD_CYCLE;
 }
 
+/*
 static index_t check_list_cycle(const _HtList *restrict ht_list)
 {
    const _HtListNode *restrict nodes = ht_list->nodes;
    
-   register index_t tortoise = 0;
-   register index_t hare     = 0;
+   register index_t tortoise = ht_list->head;
+   register index_t hare     = ht_list->head;
    
    for (register index_t counter = 0; counter < ht_list->size; counter++)
    {
@@ -85,6 +85,7 @@ static index_t check_list_cycle(const _HtList *restrict ht_list)
    
    return LIST_OK_CYCLE;
 }
+ */
 
 
 _HtList*           list_construct(_HtList *restrict ht_list)
@@ -121,14 +122,13 @@ HtValue* list_insert(_HtList *restrict ht_list, const char *restrict key, const 
       return NULL;
    
    _HtListNode *restrict nodes = ht_list->nodes;
+   const _ht_list_index_t nextFree = nodes[free].next;
    
    strncpy(nodes[free].pair.key, key, HT_MAX_N_KEY_CHARS);
    nodes[free].pair.value = *ht_value;
+   nodes[free].next = ht_list->head;
    
-   if (ht_list->size == 0)
-      ht_list->head = free;
-   
-   ht_list->free  = nodes[free].next;
+   ht_list->free  = nextFree;
    ht_list->head  = free;
    ht_list->size += 1;
    
@@ -181,17 +181,19 @@ index_t   verify_list(const _HtList *restrict ht_list)
     if (ht_list->nodes == NULL)
         return _HT_LIST_FAULT;
     
-    if ( !(is_in_range(ht_list->free) || ht_list->free == LIST_NO_FREE) )
+    if ( !(is_in_range(ht_list->free)) )
         return _HT_LIST_FAULT;
     
-    if ( !(is_in_range(ht_list->head) || ht_list->head == LIST_NO_FREE) )
+    if ( !(is_in_range(ht_list->head)) )
         return _HT_LIST_FAULT;
     
     if (!is_in_range(ht_list->size))
         return _HT_LIST_FAULT;
     
+    /*
     if (check_list_cycle(ht_list) == LIST_BAD_CYCLE)
         return _HT_LIST_FAULT;
+    */
     
     return _HT_LIST_SUCCESS;
 }

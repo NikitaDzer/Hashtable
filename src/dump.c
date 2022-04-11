@@ -291,7 +291,7 @@ static void    update_log(const HtHashtable *restrict ht_hashtable, const char *
 static inline void check_hashtable(const HtHashtable *restrict ht_hashtable)
 {
     if (verify_hashtable(ht_hashtable) == HT_BAD_LIST)
-        update_log(ht_hashtable, "├────────── Hashtable was corrupted before next caller. ─────────────────────\n");
+        update_log(ht_hashtable, "├────────── Hashtable was corrupted before next caller. ─────────────────────────────────\n");
 }
 // --------------------------------------------------- /Static functions  ------------------------------------------------------------
 

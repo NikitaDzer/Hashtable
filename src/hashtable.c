@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "../include/hashtable.h"
 #include "../include/hash.h"
 
@@ -25,9 +26,53 @@ typedef unsigned long  ht_index_t;
 HtResult ht_result = HT_SUCCESS;
 
 
-inline static ht_index_t hash(const char *const key)
+inline static ht_index_t hash1(const char *restrict key)
 {
-   return qhash(key, strlen(key));
+    return 1;
+}
+
+
+inline static ht_index_t hash2(const char *const key)
+{
+    return key[0];
+}
+
+inline static ht_index_t hash3(const char *const key)
+{
+    return strlen(key);
+}
+
+inline static ht_index_t hash4(const char *restrict key)
+{
+    const size_t len = strlen(key);
+    register ht_index_t sum = 0;
+    
+    for (register size_t i = 0; i < len; i++)
+        sum += key[i];
+    
+    return sum;
+}
+
+inline static ht_index_t hash5(const char *restrict key)
+{
+    const size_t len = strlen(key);
+    register ht_index_t hash = key[0];
+    
+    for (register size_t i = 1; i < len; i++)
+        hash = ((hash >> 1) | (hash << (sizeof(ht_index_t) * CHAR_BIT - 1))) ^ key[i];
+    
+    return hash;
+}
+
+
+inline static ht_index_t hash6(const char *restrict key)
+{
+    return qhash(key, strlen(key));
+}
+
+inline static ht_index_t hash(const char *restrict key)
+{
+    return hash5(key);
 }
 
 HtHashtable* construct_hashtable(void)
