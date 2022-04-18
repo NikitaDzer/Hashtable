@@ -29,12 +29,14 @@ Logsystem is not provided, if you are using MSVC.
 ## Usage
 Include hashtable library and construct new hashtable.
 
-```HtHashtable *ht_hashtable = construct_hashtable();```
+```c
+HtHashtable *ht_hashtable = construct_hashtable();
+```
 
 Library provides 3 methods to operate with data in hashtable: **insert, remove, search**. <br>
 Sample:
 
-```
+```c
 const char bro_key[HT_MAX_N_KEY_CHARS] = "bro";
 HtValue *bro = NULL;
 
@@ -61,7 +63,9 @@ Function ```control_hashtable(void)``` is used to get report about the latest ca
 
 After using a hashtable, you need to clear it (using **remove** for each key) and call the destructor.
 
-```destruct_hashtable(ht_hashtable);```
+```c
+destruct_hashtable(ht_hashtable);
+```
 
 ***
 ## Who? 
