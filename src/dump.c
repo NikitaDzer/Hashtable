@@ -50,7 +50,6 @@ static _HtLogsystem logsystem = {0};
 
 
 // ---------------------------------------------------  Static functions  ------------------------------------------------------------
-/*
 __attribute__((constructor))
 static void logsystem_construct(void)
 {
@@ -77,8 +76,6 @@ static void logsystem_destruct(void)
     
     free(logsystem.logs);
 }
-*/
-
 
 
 static FILE*   create_logfile(const unsigned long long logfile_index)
