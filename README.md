@@ -2,7 +2,7 @@
 Powerful hashtable library with logsystem and error controller.
 
 ## Description
-HT is written in C (C11 standard). The library provides a hashtable data structure and fast and safe API to work with it.
+HT library is written in C (C11 standard). The library provides a hashtable data structure and fast and safe API to work with it.
 > For better performance **library uses AVX2 instructions**, so your PC must support them. <br> 
 The library can be used only on X64 systems.
 
