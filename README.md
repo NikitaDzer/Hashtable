@@ -53,9 +53,9 @@ else
     hashtable_remove(ht_hashtable, transform_key("bro"));
 }
 ```
-> Hashtable keys must be in 32-byte buffer with null-terminal chars after the content part of the key.
-For example: ```bro_key[32] = ['b','r','o','\0','\0'...'\0']```, where **32 - 3 = 29** null-terminal chars.
-<br> So if you don't provide 32-byte keys, you should to use wrapper ```transform_key(const char *key)```, which is defined in the library.
+> Hashtable keys must be in 32-byte buffer with null-terminal chars after the content part of the key. <br>
+For example: ```bro_key[32] = ['b','r','o','\0','\0'...'\0']```, where **32 - 3 = 29** null-terminal chars. <br>
+So if you don't provide 32-byte keys, you should to use wrapper ```transform_key(const char *key)```, which is defined in the library.
 For better performance **we recommend using your own 32-bytes keys, than calling transform_key**.
 
 Function ```control_hashtable(void)``` is used to get report about the latest call of any hashtable functions: **construct, destruct, insert, remove, search**. In our case if we don't get the value by the key, then we will check if such a key exists at all. As a result, the program should print **"My bro is 18."** .
