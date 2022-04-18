@@ -69,5 +69,5 @@ destruct_hashtable(ht_hashtable);
 
 ***
 ## Who? 
-HT Hashtable library is made by [Nikita Dzer](https://vk.com/id188977770). <br>
+HT library is made by [Nikita Dzer](https://vk.com/id188977770). <br>
 With Love ♥.
