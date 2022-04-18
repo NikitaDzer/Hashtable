@@ -36,7 +36,7 @@ HtHashtable *ht_hashtable = construct_hashtable();
 Library provides 3 methods to operate with data in hashtable: **insert, remove, search**. <br>
 Sample:
 
-```c
+```C
 const char bro_key[HT_MAX_N_KEY_CHARS] = "bro";
 HtValue *bro = NULL;
 
