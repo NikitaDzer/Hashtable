@@ -34,9 +34,6 @@ extern inline hash_t dhash(const char* restrict key)
 
     register hash_t hash = key[0];
     register size_t len = strlen(key);
-    
-    if (len > 32)
-        len = 32;
 
     for (register size_t i = 1; i < len; i++)
         hash = ((hash >> 1) | (hash << (sizeof(hash_t) * CHAR_BIT - 1))) ^ key[i];
