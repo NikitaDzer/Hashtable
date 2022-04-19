@@ -42,11 +42,8 @@ HtValue *bro = NULL;
 hashtable_insert(ht_hashtable, bro_key, &(HtValue){.age = 18 });
 bro = hashtable_search(ht_hashtable, transform_key("bro"));
 
-if (bro == NULL)
-{
-    if (control_hashtable() == HT_BAD_KEY)
+if (control_hashtable() == HT_BAD_KEY)
     printf("No bro in hashtable...");
-}
 else
 {
     printf("My bro is %ld\n.", bro->age);
