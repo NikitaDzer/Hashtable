@@ -19,9 +19,13 @@ The library can be used only on X64 systems.
 * Clone the repository:
 
   `git clone https://github.com/NikitaDzer/Hashtable.git`
-* Or download and unzip archive:
+* Compile HT hashtable:
 
-  `https://github.com/NikitaDzer/Hashtable/archive/refs/heads/main.zip`
+  ```shell 
+  mkdir build 
+  cd build
+  cmake --build .. 
+  ```
 
 ☼ From this moment HT library is ready for your using. ☼
 
