@@ -24,7 +24,7 @@ HT is written in C (C11 standard). The library provides a hashtable data structu
   cmake --build .. 
   ```
 
-☼ From this moment HT library is ready for your using. ☼
+From this moment HT library is ready for your using.
 
 
 ## Usage
