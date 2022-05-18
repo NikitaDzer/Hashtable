@@ -1,11 +1,8 @@
 # HT - Hashtable library
-
-A powerful hashtable library with call logging system and error handler.
-***
 ## Description
+A powerful hashtable library with call logging system and error handler. <br>
 HT is written in C (C11 standard). The library provides a hashtable data structure and fast and safe API to work with it.
 > For better performance **library uses AVX2 instructions**, so your CPU must support them. <br> 
-The library can be used only on X64 systems.
 
 ## Features
 * Handler for error processing
@@ -72,5 +69,5 @@ destruct_hashtable(ht_hashtable);
 
 ***
 ## Who? 
-HT Hashtable library is made by [Nikita Dzer](https://vk.com/id188977770). <br>
-With Love ♥.
+HT Hashtable library is written by [Nikita Dzer](https://vk.com/id188977770). <br>
+♥ WITH LOVE
