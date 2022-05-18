@@ -1,12 +1,11 @@
 # HT - Hashtable library
 ## Description
-A powerful hashtable library with call logging system and error handler. <br>
-HT is written in C (C11 standard). The library provides a hashtable data structure and fast and safe API to work with it.
-> For better performance **library uses AVX2 instructions**, so your CPU must support them. <br> 
+A powerful hashtable library with the logging system and the errors handler. <br>
+The library provides a hashtable data structure and fast and safe API to work with it.
+> For better performance **the library uses AVX2 instructions**, so your CPU must support them. <br> 
 
 ## Features
 * Handler for error processing
-
 * 3 hashtable modes for different data amount
 * Smart logging system for tracking API functions calls
 > The logging system is not provided, if you are using MSVC.
@@ -18,10 +17,12 @@ HT is written in C (C11 standard). The library provides a hashtable data structu
   `git clone https://github.com/NikitaDzer/Hashtable.git`
 * Compile HT hashtable:
 
-  ```shell 
-  mkdir build 
+  ```shell
+  cd Hashtable
+  mkdir build
   cd build
-  cmake --build .. 
+  cmake ..
+  make
   ```
 
 From this moment HT library is ready for your using.
@@ -52,7 +53,7 @@ else
 }
 ```
 > Hashtable **keys must be in 32-byte buffers with null-terminal chars after the content part** of keys. For example: <br>
-> ```bro_key[HT_MAX_N_KEY_CHARS] = "bro"``` <br>
+> ```bro_key[HT_MAX_N_KEY_CHARS] = "bro"```
 or <br>
 ```bro_key[32] = ['b','r','o','\0','\0'...'\0']```, where **32 - 3 = 29** null-terminal chars. <br> 
 So if you don't provide 32-byte keys, you should to use wrapper ```const char* transform_key(const char *key)```, which is defined in the library.
@@ -69,5 +70,5 @@ destruct_hashtable(ht_hashtable);
 
 ***
 ## Who? 
-HT Hashtable library is written by [Nikita Dzer](https://vk.com/id188977770). <br>
+HT Hashtable library is made by [Nikita Dzer](https://vk.com/id188977770). <br>
 ♥ WITH LOVE
