@@ -1,3 +1,16 @@
+<pre>
+ ___  ___  ________  ________  ___  ___  _________  ________  ________  ___       _______      
+|\  \|\  \|\   __  \|\   ____\|\  \|\  \|\___   ___\\   __  \|\   __  \|\  \     |\  ___ \     
+\ \  \\\  \ \  \|\  \ \  \___|\ \  \\\  \|___ \  \_\ \  \|\  \ \  \|\ /\ \  \    \ \   __/|    
+ \ \   __  \ \   __  \ \_____  \ \   __  \   \ \  \ \ \   __  \ \   __  \ \  \    \ \  \_|/__  
+  \ \  \ \  \ \  \ \  \|____|\  \ \  \ \  \   \ \  \ \ \  \ \  \ \  \|\  \ \  \____\ \  \_|\ \ 
+   \ \__\ \__\ \__\ \__\____\_\  \ \__\ \__\   \ \__\ \ \__\ \__\ \_______\ \_______\ \_______\
+    \|__|\|__|\|__|\|__|\_________\|__|\|__|    \|__|  \|__|\|__|\|_______|\|_______|\|_______|
+                       \|_________|                                                            
+                                                                                               
+                                                                                               
+</pre>
+
 # HT - Hashtable library
 ## Description
 A powerful hashtable library with the logging system and the errors handler. <br>
@@ -228,8 +241,8 @@ _**__CheckForDebugger** is the VS19 debugger function; **get_keys**, **free_keys
 ### What about a real performance boost?
 > The program was compiled with the release mode in MSVC.
 
-Before optimizations: **~2730ms**. <br>
-After  optimizations: **~1410ms**. <br>
+Before optimizations: **~273ms**. <br>
+After  optimizations: **~141ms**. <br>
 Performance boost: **~+93%**. 
 
  Unfortunately, it's hard to say, how cache optimizations influenced on the final result. But aligning everything is definitely not good: **data becomes less spatially local**, especially, if there is a lot of data.
