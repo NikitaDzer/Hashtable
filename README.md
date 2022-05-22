@@ -196,6 +196,7 @@ The results of the optimizations are presented in the tables (the performance bo
 |  Unoptimized  |  Previous  |
 |:-------------:|:----------:|
 |     +8.7%     |   +23.4%   |
+
 Since the last optimization increased performance _(relative to the unoptimized version)_ by less than 10%, we stop here.
 
 
