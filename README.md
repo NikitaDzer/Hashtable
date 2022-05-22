@@ -241,5 +241,5 @@ But it's only an approximate number. And, of course, **it was worth all wasted d
 
 ***
 ## Who? 
-HT Hashtable library is written by [Nikita Dzer](https://vk.com/id188977770). <br>
+HT library is written by [Nikita Dzer](https://vk.com/id188977770). <br>
 ♥ WITH LOVE
